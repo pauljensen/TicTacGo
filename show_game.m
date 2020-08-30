@@ -1,4 +1,9 @@
-function show_game(game,score)
+function show_game(game,scoreargs)
+% Show the game board, score, and next move.
+%
+% Inputs
+%   GAME       Game structure.
+%   SCOREARGS  Cell array or arguments passed to SCORE_GAME. Default = {}.
 
 [m,n] = size(game.board);
 hline = ['+' repmat('---+',1,n) '\n'];
@@ -13,14 +18,11 @@ for i = 1:m
 end
 
 if nargin < 2
-    scorefun = @scorefun_straight_quad;
-    score = true;
+    scoreargs = {};
 end
 
-if score
-    [~,scoreX,scoreO] = score_game(game,scorefun);
-    fprintf('Score: X''s = %g, O''s = %g\n',scoreX,scoreO);
-end
+[winner,scoreX,scoreO] = score_game(game,scoreargs{:});
+fprintf('Score: X''s = %g, O''s = %g\n',scoreX,scoreO);
 
 nX = last_index(game.movesX);
 nO = last_index(game.movesO);
@@ -30,4 +32,14 @@ if nX > nO
 elseif nO > nX
     next = 'X';
 end
-fprintf('Next move is %s.\n',next);
+
+if ~isempty(available_moves(game.board))
+    fprintf('Next move is %s.\n',next);
+else
+    fprintf('Game is complete.\n');
+    if winner == 't'
+        fprintf('Draw.\n');
+    else
+        fprintf('%s wins.\n',winner);
+    end
+end

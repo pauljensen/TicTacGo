@@ -1,4 +1,5 @@
 function [lengths] = sequence_lengths(a)
+% The lengths of all sequences of TRUEs in a logical vector.
 
 lengths = [];
 in = false;

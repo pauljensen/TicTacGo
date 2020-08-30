@@ -1,4 +1,10 @@
 function [game] = make_move(game,player,location)
+% Make a move on the board.
+%
+% Inputs
+%   GAME      Game structure.
+%   PLAYER    Either 'X' or 'O'.
+%   LOCATION  Linear or (i,j) index of the move.
 
 if length(location) > 1
     location = sub2ind(size(game.board),location(1),location(2));

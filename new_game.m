@@ -1,4 +1,10 @@
 function [game] = new_game(dims,nblocked,first)
+% Create a new game structure.
+%
+% Inputs
+%   dims      Size of the gameboard. Length 2 array of integers.
+%   nblocked  Number of spaces to block. Locations are picked randomly.
+%   first     The player that goes first. Either 'X' or 'O'.
 
 if nargin < 3
     first = 'X';

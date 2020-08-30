@@ -7,9 +7,13 @@ end
 scoreX = scorefun(game.board == 'X');
 scoreO = scorefun(game.board == 'O');
 
-winner = 't';
-if scoreX > scoreO
-    winner = 'X';
-elseif scoreO > scoreX
-    winner = 'O';
+if ~isempty(available_moves(game))
+    winner = '?';
+else
+    winner = 't';
+    if scoreX > scoreO
+        winner = 'X';
+    elseif scoreO > scoreX
+        winner = 'O';
+    end
 end
