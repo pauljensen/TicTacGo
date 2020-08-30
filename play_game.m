@@ -1,6 +1,25 @@
 function [game,winner,scoreX,scoreO] = play_game(game,varargin)
+% Play a TicTacGo game using policies.
+%
+%   [GAME,WINNER,SCOREX,SCOREO] = PLAY_GAME(GAME,...params...)
+%
+% Inputs
+%   GAME  A game structure. If empty, a new game is created.
+%
+% Parameters
+%   'policyX'
+%   'policyO' Policies for each player. The default is POLICY_RANDOM.
+%             Policies take a game structure and return a single move.
+%
+%   'show'    If true, show the board after each move. Default = false.
+%
+%   'moves'   The number of moves to simulate. By default the entire game
+%             is played.
+%
+% Outputs
+%   The final game structure plus the winner and scores for each player.
 
-if isempty(game)
+if isempty(game) || nargin == 0
     game = new_game();
 end
 
